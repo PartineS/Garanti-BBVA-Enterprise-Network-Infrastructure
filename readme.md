@@ -38,5 +38,3 @@ Connectivity has been successfully verified across all VLANs using ICMP (Ping) t
 - `/images`: Includes high-resolution topology diagrams and test proof screenshots.
 
 ---
-**Developer:** Hasan Safa Mutlu
-**Role:** Information Security Technology Student at Beykoz University
