@@ -9,7 +9,7 @@ The infrastructure is built on a **Core-Access layer architecture** to ensure th
 ### 1. Infrastructure Overview (Global Topology)
 The following diagram illustrates the complete hierarchical star topology, including the server room, operational departments, and guest zones.
 
-![Network Infrastructure Map](https://i.imgur.com/MO0Sxpz.jpg)
+![Network Infrastructure Map](https://i.imgur.com/MO0Sxpz.png)
 *Figure 1: Complete network map showcasing departmental segmentation and device positioning.*
 
 ## Technical Specifications & Implementation
