@@ -7,7 +7,7 @@ This repository contains a high-availability network infrastructure design for a
 The architecture consists of a 3650 Multilayer Switch at the Core/Distribution layer and several 2960 switches at the Access layer, providing dedicated connectivity for each floor/department.
 
 ### Infrastructure Overview
-![Network Infrastructure Map](images/topology_overview.png)
+![Network Infrastructure Map](https://i.imgur.com/MO0Sxpz.png)
 *Figure 1: Full hierarchical network map with departmental segmentation (VLANs).*
 
 ## Technical Specifications
