@@ -103,5 +103,3 @@ PartineS
 https://github.com/PartineS
 
 ---
-
-This project demonstrates enterprise networking principles such as VLAN segmentation, inter-VLAN routing, hierarchical design, and secure departmental isolation within a banking infrastructure.
