@@ -1,52 +1,107 @@
-# Garanti BBVA Enterprise Network Infrastructure Design
+# Garanti BBVA – Enterprise Network Infrastructure Design
 
 ## Project Overview
-This project represents a comprehensive architectural design and implementation of a secure, scalable, and high-performance network infrastructure for a modern bank branch. Modeled after enterprise-grade banking standards, the simulation focuses on high availability and strict departmental isolation using the Cisco Hierarchical Design Model.
+This project presents a secure, scalable, and enterprise-grade network infrastructure design for a modern banking branch.  
+The architecture is modeled according to real-world banking standards, focusing on high availability, departmental isolation, and efficient traffic management using the Cisco Hierarchical Design Model.
+
+The entire topology has been designed and tested in Cisco Packet Tracer, simulating real operational behavior in a financial institution environment.
+
+---
 
 ## Design Philosophy
-The infrastructure is built on a **Core-Access layer architecture** to ensure that local departmental traffic is handled efficiently at the access layer while inter-departmental communication is managed by a high-speed multilayer core.
+The infrastructure follows a Core–Access Layer Architecture, ensuring:
 
-### 1. Infrastructure Overview (Global Topology)
-The following diagram illustrates the complete hierarchical star topology, including the server room, operational departments, and guest zones.
+- Efficient handling of local traffic at the access layer  
+- High-speed inter-departmental communication at the core layer  
+- Logical separation of departments to prevent lateral movement  
+- Centralized routing and policy enforcement  
 
-![Network Infrastructure Map](https://i.imgur.com/MO0Sxpz.png)
-*Figure 1: Complete network map showcasing departmental segmentation and device positioning.*
+---
 
-## Technical Specifications & Implementation
+## Infrastructure Overview (Global Topology)
 
-### A. Network Segmentation (VLANs)
-To mitigate security risks such as unauthorized lateral movement, the network is logically partitioned into distinct VLANs. Each zone is isolated within its own broadcast domain:
+![Network Infrastructure Map](images/topology.png)
+
+Figure 1:  
+Complete hierarchical star topology illustrating the core switch, access switches, server room, operational departments, and isolated guest network.
+
+---
+
+## Technical Specifications and Implementation
+
+### A. Network Segmentation (VLAN Architecture)
+
+To minimize security risks and enforce strict access boundaries, the network is segmented into multiple VLANs, each mapped to a dedicated subnet and gateway.
 
 | Zone | VLAN ID | Subnet | Gateway | Description |
-| :--- | :---: | :--- | :--- | :--- |
-| **Server Room** | 10 | 10.0.10.0/24 | 10.0.10.1 | Core banking servers & local assets |
-| **Operations** | 20 | 10.0.20.0/24 | 10.0.20.1 | Teller and front-office banking |
-| **Loans** | 30 | 10.0.30.0/24 | 10.0.30.1 | Specialized individual banking services |
-| **IT Dept** | 40 | 10.0.40.0/24 | 10.0.40.1 | Network administration and technical support |
-| **Management** | 50 | 10.0.50.0/24 | 10.0.50.1 | Executive-level internal workstations |
-| **Guest/Café** | 60 | 192.168.1.0/24 | 192.168.1.1 | Isolated wireless guest access |
+|---|---|---|---|---|
+| Server Room | 10 | 10.0.10.0/24 | 10.0.10.1 | Core banking servers and internal services |
+| Operations | 20 | 10.0.20.0/24 | 10.0.20.1 | Teller desks and front-office operations |
+| Loans | 30 | 10.0.30.0/24 | 10.0.30.1 | Individual and corporate loan services |
+| IT Department | 40 | 10.0.40.0/24 | 10.0.40.1 | Network administration and system support |
+| Management | 50 | 10.0.50.0/24 | 10.0.50.1 | Executive and managerial systems |
+| Guest / Café | 60 | 192.168.1.0/24 | 192.168.1.1 | Fully isolated wireless guest access |
 
-### B. Core Switching & Routing
-- **Inter-VLAN Routing:** A Cisco 3650 Multilayer Switch acts as the network backbone, utilizing Switch Virtual Interfaces (SVI) to facilitate communication between departments.
-- **IEEE 802.1Q Trunking:** All uplinks between access switches (2960) and the core switch are configured as trunk ports to manage multi-VLAN traffic.
-- **Peripheral Connectivity:** High-speed Fast Ethernet modules were deployed for enterprise printers to ensure seamless office automation across all floors.
+---
+
+### B. Core Switching and Routing
+
+- Inter-VLAN Routing  
+  Implemented via a Cisco 3650 Multilayer Switch using Switch Virtual Interfaces (SVIs).
+
+- IEEE 802.1Q Trunking  
+  All uplinks between Cisco 2960 access switches and the core switch operate in trunk mode to carry multi-VLAN traffic.
+
+- Peripheral Connectivity  
+  Enterprise printers are connected to access switches with correct VLAN assignments, ensuring seamless departmental printing.
+
+---
 
 ## Verification and Testing
 
 ### ICMP Connectivity (Ping Tests)
-Connectivity has been rigorously verified across all network segments. The successful ICMP (Ping) tests confirm that the routing logic, gateway configurations, and trunking protocols are functioning optimally.
 
-![Ping Verification](https://i.imgur.com/RXxoJD2.png)
-*Figure 2: Real-time verification showcasing successful packet delivery between workstations and the central server room.*
+![Ping Verification](images/ping-test.png)
 
-### Service Accessibility
-- **Local Web Services:** Internal HTTP servers are accessible via departmental PC browsers, confirming Layer 7 (Application) functionality.
-- **Printer Integration:** Peripheral devices successfully respond to requests from their respective subnets, confirming correct VLAN port assignments.
+Figure 2:  
+Successful ICMP tests between workstations and the server network confirm:
 
-## Future Roadmap
-This Packet Tracer design serves as a blueprint for the next phase of the project:
-1.  **Virtualization:** Transitioning the network logic to a **pfSense** environment within **VirtualBox**.
-2.  **Firewall Policies:** Implementing granular Access Control Lists (ACLs) to restrict sensitive server access.
+- Correct VLAN assignment  
+- Proper gateway configuration  
+- Functional inter-VLAN routing  
+- Stable trunk connections  
 
 ---
-**Developer:** [PartineS](https://github.com/PartineS)
+
+### Service Accessibility Validation
+
+- Internal Web Services  
+  Departmental workstations can successfully access internal HTTP services hosted in the server VLAN.
+
+- Printer Services  
+  Network printers respond correctly within their assigned VLANs, validating access-layer configuration accuracy.
+
+---
+
+## Future Roadmap
+
+This project serves as a foundation for further enterprise-level enhancements:
+
+1. Virtualized Firewall Deployment  
+   Migration of routing and firewall logic to pfSense deployed on VirtualBox or VMware.
+
+2. Advanced Security Policies  
+   Implementation of granular Access Control Lists (ACLs) to restrict sensitive server access.
+
+3. Monitoring and Logging  
+   Integration of centralized logging, traffic monitoring, and audit readiness mechanisms.
+
+---
+
+## Developer
+PartineS  
+https://github.com/PartineS
+
+---
+
+This project demonstrates enterprise networking principles such as VLAN segmentation, inter-VLAN routing, hierarchical design, and secure departmental isolation within a banking infrastructure.
